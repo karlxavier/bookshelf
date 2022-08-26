@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::API
-  before_action :authenticate_user!
+  include V1::Response
+
+  before_action :authenticate_v1_user!
 end

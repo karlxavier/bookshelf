@@ -1,37 +1,32 @@
+# frozen_string_literal: true
+
 module V1
   class BooksController < ApplicationController
     def reading_lists
-      books = current_user.books
+      reading_books = current_user.books
 
-      render json: renderer(books)
+      render_blueprint_api(
+        data: reading_books,
+        blueprint: Blueprinters::V1::BookBlueprint
+      )
     end
 
     def finished_books
-      books = current_user.finished_books
+      finished_books = current_user.finished_books
 
-      render json: renderer(books)
+      render_blueprint_api(
+        data: finished_books,
+        blueprint: Blueprinters::V1::BookBlueprint
+      )
     end
 
     def discover
-      books = current_user.unread_books
+      discover_books = current_user.unread_books
 
-      render json: renderer(books)
-    end
-
-    private
-
-    def renderer(books)
-      caller_method = caller_locations.first.label
-
-      {
-        data: ActiveModelSerializers::SerializableResource.new(
-          books,
-          each_serializer: BookSerializer
-        ),
-        message: ["User #{caller_method.humanize} fetched successfully"],
-        status: 200,
-        type: 'Success'
-      }
+      render_blueprint_api(
+        data: discover_books,
+        blueprint: Blueprinters::V1::BookBlueprint
+      )
     end
   end
 end
