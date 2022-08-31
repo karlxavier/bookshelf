@@ -5,8 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'devise'
-gem 'devise-jwt'
 gem 'puma', '~> 5.0'
 gem 'net-imap', require: false
 gem 'net-smtp', require: false
@@ -16,6 +14,8 @@ gem 'rack-cors'
 gem 'pg'
 gem 'pg_search'
 gem 'blueprinter'
+gem 'bcrypt', '~> 3.1.7'
+gem 'knock', github: "nsarno/knock", branch: "master", ref: "9214cd027422df8dc31eb67c60032fbbf8fc100b"
 
 group :test do
   gem 'factory_bot_rails'
