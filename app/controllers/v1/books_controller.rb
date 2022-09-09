@@ -39,7 +39,7 @@ module V1
     end
 
     def discover
-      discover_books = User.first.unread_books
+      discover_books = current_user.unread_books
 
       render_blueprint_api(
         data: discover_books,

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   include Knock::Authenticable
   include V1::Response
 
-  # before_action :authenticate_user
+  before_action :authenticate_user, except: %i(create)
 
   def current_user
     if token

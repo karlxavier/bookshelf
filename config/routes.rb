@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   concern :api_base do
     post :user_token, to: 'user_token#create'
+    get :auth_token, to: 'user_token#auth_token'
 
     resources :books, only: %i(show index) do
       collection do
@@ -10,9 +11,6 @@ Rails.application.routes.draw do
         get :finished_books
         get :discover
         get :search
-      end
-
-      member do
         post :add_reading_list
       end
     end
