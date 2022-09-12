@@ -1,14 +1,21 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   concern :api_base do
-    devise_for :users
+    post :user_token, to: 'user_token#create'
+    get :auth_token, to: 'user_token#auth_token'
 
-    resources :books, only: [] do
+    resources :books, only: %i(show index) do
       collection do
-        get(:reading_lists)
-        get(:finished_books)
-        get(:discover)
+        get :reading_lists
+        get :finished_books
+        get :discover
+        get :search
+        post :add_reading_list
       end
     end
+
+    resources :users, only: %i(create edit update)
   end
 
   namespace :v1 do

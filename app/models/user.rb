@@ -1,10 +1,12 @@
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+# frozen_string_literal: true
 
-  has_many :user_books
+class User < ApplicationRecord
+  has_secure_password
+
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
+
+  has_many :user_books, dependent: :destroy
   has_many :books, through: :user_books
 
   def unread_books
@@ -13,5 +15,18 @@ class User < ApplicationRecord
 
   def finished_books
     my_reading_lists.where(finished: true)
+  end
+
+  def to_token_payload
+    {
+      sub: id,
+      name: name
+    }
+  end
+
+  def add_to_my_list!(book)
+    user_books.create!(
+      book:,
+    )
   end
 end

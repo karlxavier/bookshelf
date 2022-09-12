@@ -1,10 +1,8 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
-RSpec.configure do |c|
-  c.use_transactional_examples = true
-end
-
-RSpec.describe Book, :type => :model do
+RSpec.describe Book, type: :model do
 
   describe 'associations' do
     it 'should have many users' do
@@ -24,7 +22,7 @@ RSpec.describe Book, :type => :model do
     let(:user) { create(:user) }
     let(:user_reading_book) { books.first }
 
-    before(:example) do
+    before do
       UserBook.create!(
         book_id: user_reading_book.id,
         user:
@@ -41,9 +39,9 @@ RSpec.describe Book, :type => :model do
 
     context '.unread_books' do
       it 'will get user unread books' do
-        expect(
-          described_class.unread_books(user).map(&:title)
-        ).not_to include(user_reading_book.title)
+        result = described_class.unread_books(user)
+        
+        expect(result).not_to include(user_reading_book)
       end
     end
   end
