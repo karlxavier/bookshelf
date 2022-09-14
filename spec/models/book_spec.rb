@@ -46,4 +46,38 @@ RSpec.describe Book, type: :model do
     end
   end
 
+  describe 'seachable' do
+    let(:books) { create_list(:book, 3) }
+    let(:book) { books.first }
+
+    context 'when title' do
+      let(:keyword) { book.title }
+
+      it 'will search for title' do
+        result = described_class.search(keyword:)
+
+        expect(result).to include(book.as_json)
+      end
+    end
+
+    context 'when description' do
+      let(:keyword) { book.description }
+
+      it 'will search for title' do
+        result = described_class.search(keyword:)
+
+        expect(result).to include(book.as_json)
+      end
+    end
+
+    context 'when author' do
+      let(:keyword) { book.author }
+
+      it 'will search for title' do
+        result = described_class.search(keyword:)
+
+        expect(result).to include(book.as_json)
+      end
+    end
+  end
 end
