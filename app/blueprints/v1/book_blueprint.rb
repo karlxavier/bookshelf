@@ -5,9 +5,9 @@ module V1
     identifier :id
 
     fields :title,
-            :description,
-            :author,
-            :image
+           :description,
+           :author,
+           :image
 
     field :finished_reading do |book|
       book.user_books.first&.finished || false

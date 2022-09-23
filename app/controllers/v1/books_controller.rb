@@ -56,5 +56,15 @@ module V1
         blueprint: ::V1::BookBlueprint
       )
     end
+
+    def search
+      query = params['query'] || ''
+      res = Book.search(query)
+
+      render_blueprint_api(
+        data: res.response['hits']['hits'],
+        blueprint: ::V1::SearchResultsBlueprint
+      )
+    end
   end
 end

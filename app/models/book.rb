@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
+  include Searchable
+
   has_many :user_books, dependent: :destroy
   has_many :users, through: :user_books
 

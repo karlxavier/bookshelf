@@ -16,6 +16,7 @@ gem 'pg_search'
 gem 'blueprinter'
 gem 'bcrypt', '~> 3.1.7'
 gem 'knock', github: "nsarno/knock", branch: "master", ref: "9214cd027422df8dc31eb67c60032fbbf8fc100b"
+gem 'elasticsearch-model'
 
 group :test do
   gem 'factory_bot_rails'
