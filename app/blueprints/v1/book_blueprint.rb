@@ -13,6 +13,10 @@ module V1
       book.user_books.first&.finished || false
     end
 
+    field :created_at do |book|
+      book.created_at.strftime("%b %d, %Y")
+    end
+
     association :users, blueprint: ::V1::UserBlueprint
   end
 end

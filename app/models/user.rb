@@ -14,7 +14,11 @@ class User < ApplicationRecord
   end
 
   def finished_books
-    user_books.where(finished: true)
+    userbooks = user_books.where(finished: true)
+  end
+
+  def reading_lists
+    userbooks = user_books.where(finished: false)
   end
 
   def to_token_payload

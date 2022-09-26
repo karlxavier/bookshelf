@@ -13,6 +13,12 @@ Rails.application.routes.draw do
         get :search
         post :add_reading_list
       end
+
+      member do
+        post :mark_as_read
+        post :mark_as_unread
+        post :remove_from_list
+      end
     end
 
     resources :users, only: %i(create edit update)
